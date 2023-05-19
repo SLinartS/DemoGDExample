@@ -1,48 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public InputField regLogin;
-    public InputField regPassword;
+    [SerializeField] InputField loginAuth;
+    [SerializeField] InputField passwordAuth;
 
-    public InputField authLogin;
-    public InputField authPassword;
+    [SerializeField] InputField loginReg;
+    [SerializeField] InputField passwordReg;
 
-    public GameObject regWindow;
-    public GameObject authWindow;
-    public GameObject menuWindow;
-
-    public void Registration()
-    {
-
-        if (regLogin.text != string.Empty && regPassword.text != string.Empty)
-        {
-            if (UsersData.CheckForLogin(regLogin.text))
-            {
-                authWindow.SetActive(true);
-                regWindow.SetActive(false);
-                Debug.Log("add");
-                UsersData.users.Add(new User { login = regLogin.text, password = regPassword.text });
-            }
-        }
-    }
+    [SerializeField] GameObject menuWindow;
+    [SerializeField] GameObject regWindow;
+    [SerializeField] GameObject authWindow;
 
     public void Auth()
     {
-        if (UsersData.CheckForUser(authLogin.text, authPassword.text))
+        string login = loginAuth.text;
+        string password = passwordAuth.text;
+
+        if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
         {
-            menuWindow.SetActive(true);
-            authWindow.SetActive(false);
-            Debug.Log("enter");
+            Debug.Log("Ошибка");
+            return;
         }
+        
+        if(UserData.CheckUser(login, password))
+        {
+            Debug.Log("Вы залогинены");
+            authWindow.SetActive(false);
+            menuWindow.SetActive(true);
+            
+            return;
+        };
+        Debug.Log("Ошибка логина или пароля");
     }
 
-    public void LoadGame()
+    public void Reg()
     {
-        SceneManager.LoadScene(1);
+        string login = loginReg.text;
+        string password = passwordReg.text;
+
+        if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+        {
+            Debug.Log("Ошибка");
+            return;
+        }
+
+        if (!UserData.CheckLogin(login))
+        {
+            Debug.Log("Ошибка x2");
+            return;
+        }
+
+        if (UserData.UserCreate(login, password))
+        {
+            Debug.Log("Вы regnyti");
+            regWindow.SetActive(false);
+            authWindow.SetActive(true);
+
+            return;
+        };
+        Debug.Log("Ошибка логина или пароля");
     }
 }

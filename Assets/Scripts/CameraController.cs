@@ -4,30 +4,32 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    Vector2 startPos;
-    Vector2 endPos;
-    [SerializeField] Camera main;
+    Vector3 startPos;
+    Vector3 endPos;
+    [SerializeField] Camera mainCamera;
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) 
+        if (Input.GetMouseButtonDown(2))
         {
-            startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            startPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         }
-        if (Input.GetMouseButton(1)) 
+        if (Input.GetMouseButton(2))
         {
-            endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            Vector2 resultPos = startPos - endPos;
-            gameObject.transform.position += (Vector3)resultPos;
+            endPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        Vector2 zoom = Input.mouseScrollDelta;
+        gameObject.transform.position += startPos - endPos;
 
-        if (zoom != Vector2.zero)
+        Vector3 zoom = Input.mouseScrollDelta;
+
+        if (zoom != Vector3.zero)
         {
-            main.orthographicSize -= zoom.y;
+            if (mainCamera.orthographicSize - zoom.y >= 1 && mainCamera.orthographicSize - zoom.y < 10)
+            {
+                mainCamera.orthographicSize -= zoom.y;
+            }
+
         }
     }
 }

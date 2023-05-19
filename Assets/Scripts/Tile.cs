@@ -1,80 +1,90 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditorInternal.Profiling;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour
 {
-    public GameObject build;
-    public List<GameObject> prefabStone;
-    public GameObject child;
-    SpriteRenderer spriteRenderer;
-
-    public Tile TileTop = null;
-    public Tile TileBottom = null;
-    public Tile TileRight = null;
-    public Tile TileLeft = null;
+    [SerializeField] GameObject[] stonePrefabs;
+    [SerializeField] GameObject stonePos;
+    [SerializeField] GameObject housePos;
+    GameObject stone;
+    GameObject house;
 
     public bool road;
     public int count;
 
-    public GameMan game;
+    public GameController gameController;
 
-    public void Awake()
+    SpriteRenderer spriteRenderer;
+
+
+    public Tile tileTop = null;
+    public Tile tileBottom = null;
+    public Tile tileRight = null;
+    public Tile tileLeft = null;
+
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     private void Start()
     {
-        int n = Random.Range(0, prefabStone.Count * 3);
-        if (n < prefabStone.Count)
+        int numberTILT = Random.Range(1, 30);
+        if (numberTILT < stonePrefabs.Length)
         {
-            child = Instantiate(prefabStone[n], build.transform.position, Quaternion.identity);
+
+            stone = Instantiate(stonePrefabs[numberTILT], stonePos.transform.position, Quaternion.identity, gameObject.transform);
         }
     }
+
     private void OnMouseDown()
     {
-        spriteRenderer.sprite = game.paletType;
-        road = true;
-        myType();
-        if (TileTop) TileTop.myType();
-        if (TileRight) TileRight.myType();
-        if (TileBottom) TileBottom.myType();
-        if (TileLeft) TileLeft.myType();
-        //if (Input.GetMouseButtonDown(0) && Input.GetKey(KeyCode.LeftControl))
-        //{
-        //    if (child != null)
-        //    {
-        //        Destroy(child);
-        //    }
-        //}
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    if (child == null)
-        //    {
-        //        spriteRenderer.sprite = game.paletType;
-        //    }
-        //}
+        if (Input.GetMouseButtonDown(0) && Input.GetKey(KeyCode.LeftControl))
+        {
+            Destroy(stone);
+        }
+        if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !stone)
+        {
+            if (gameController.selectedSprite)
+            {
+                spriteRenderer.sprite = gameController.selectedSprite;
+            }
+            if (gameController.selectedPrefab)
+            {
+                house = Instantiate(gameController.selectedPrefab, housePos.transform.position, Quaternion.identity, gameObject.transform);
+            }
+            if (gameController.selectedRoadSprite)
+            {
+                spriteRenderer.sprite = gameController.selectedRoadSprite;
+                road = true;
+                TypeRoad();
+                if (tileTop) tileTop.TypeRoad();
+                if (tileBottom) tileBottom.TypeRoad();
+                if (tileRight) tileRight.TypeRoad();
+                if (tileLeft) tileLeft.TypeRoad();
+            }
+
+        }
     }
 
-    public void myType()
+    public void TypeRoad()
     {
         count = 0;
 
-        if (TileTop && TileTop.road)
+        if (tileTop && tileTop.road)
         {
             count += 1;
         }
-        if (TileRight && TileRight.road)
+        if (tileRight && tileRight.road)
         {
             count += 2;
         }
-        if (TileBottom && TileBottom.road)
+        if (tileBottom && tileBottom.road)
         {
             count += 4;
         }
-        if (TileLeft && TileLeft.road)
+        if (tileLeft && tileLeft.road)
         {
             count += 8;
         }
