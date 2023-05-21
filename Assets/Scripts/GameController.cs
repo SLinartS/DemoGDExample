@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public Sprite selectedSprite;
     public Sprite selectedRoadSprite;
     public GameObject selectedPrefab;
+    public GameObject selectedRoofPrefab;
     public Tile[,] tiles;
 
 
@@ -26,12 +27,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         CreateMap();
-    }
-
-
-    void Update()
-    {
-
+        InitialTile();
     }
 
     void CreateMap()
@@ -45,7 +41,7 @@ public class GameController : MonoBehaviour
                 {
                     pos = new Vector3(offsetX * x - width / 2, offsetY * y - height / 4, y);
                 }
-                else
+                else   
                 {
                     pos = new Vector3(offsetX * x + offsetX / 2 - width / 2, offsetY * y - height / 4, y);
                 }
@@ -55,26 +51,37 @@ public class GameController : MonoBehaviour
                 tiles[x, y] = newtile.GetComponent<Tile>();
             }
         }
-        InitialTile();
+    }
+
+    public void ClearSelected()
+    {
+        selectedPrefab = null;
+        selectedRoofPrefab = null;
+        selectedRoadSprite = null;
+        selectedSprite = null;
     }
 
     public void SelectTile(Sprite newSprite)
     {
-        selectedPrefab = null;
-        selectedRoadSprite = null;
+        ClearSelected();
         selectedSprite = newSprite;
     }
 
     public void SelectHouse(GameObject newPrefab)
     {
-        selectedSprite = null;
-        selectedRoadSprite = null;
+        ClearSelected();
         selectedPrefab = newPrefab;
-    }    
+    }
+
+    public void SelectRoof(GameObject newPrefab)
+    {
+        ClearSelected();
+        selectedRoofPrefab = newPrefab;
+    }
+
     public void SelectRoadSprite(Sprite newRoadSprite)
     {
-        selectedSprite = null;
-        selectedPrefab = null;
+        ClearSelected();
         selectedRoadSprite = newRoadSprite;
     }
 
@@ -93,7 +100,7 @@ public class GameController : MonoBehaviour
 
                     if (x - 1 >= 0 && y - 1 >= 0)
                     {
-                        tiles[x, y].tileBottom = tiles[x - 1, y - 1];
+                        tiles[x, y  ].tileBottom = tiles[x - 1, y - 1];
                     }
 
                     if (y - 1 >= 0)
@@ -114,12 +121,12 @@ public class GameController : MonoBehaviour
                         tiles[x, y].tileTop = tiles[x + 1, y + 1];
                     }
 
-                    if (y - 1 != -1)
+                    if (y - 1 >= 0)
                     {
                         tiles[x, y].tileBottom = tiles[x, y - 1];
                     }
 
-                    if (x + 1 < width & y - 1 != -1)
+                    if (x + 1 < width & y - 1 >= 0)
                     {
                         tiles[x, y].tileRight = tiles[x + 1, y - 1];
                     }

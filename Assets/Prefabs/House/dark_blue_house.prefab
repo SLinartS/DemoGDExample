@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1756856940690237413}
   - component: {fileID: 8289940641091908032}
+  - component: {fileID: -1144589647469206849}
+  - component: {fileID: 831641819376278712}
   m_Layer: 0
-  m_Name: Block1
+  m_Name: dark_blue_house
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,3 +86,60 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1144589647469206849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915688803293283554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59b2bf395d259f40951ede8428aa83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floors: []
+  gameController: {fileID: 0}
+  floorPrefab: {fileID: 5774454567918038664, guid: d799b4612fc27a140a0cc0dacdd7e9df, type: 3}
+--- !u!60 &831641819376278712
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915688803293283554}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.36, y: 1.23}
+    newSize: {x: 1.36, y: 1.23}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.68, y: -0.235}
+      - {x: 0.68, y: 0.24499999}
+      - {x: 0.66999996, y: 0.255}
+      - {x: 0.12, y: 0.575}
+      - {x: 0.04, y: 0.615}
+      - {x: -0.04, y: 0.615}
+      - {x: -0.57, y: 0.315}
+      - {x: -0.66999996, y: 0.255}
+      - {x: -0.68, y: 0.24499999}
+      - {x: -0.68, y: -0.235}
+      - {x: -0.66999996, y: -0.255}
+      - {x: -0.31, y: -0.465}
+      - {x: -0.04, y: -0.615}
+      - {x: 0.049999997, y: -0.615}
+      - {x: 0.12, y: -0.575}
+      - {x: 0.45, y: -0.385}
+      - {x: 0.64, y: -0.275}

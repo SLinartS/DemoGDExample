@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1060423958108601780}
   - component: {fileID: 1702038130903756395}
+  - component: {fileID: 4414791193311388470}
   m_Layer: 0
   m_Name: stone 8
   m_TagString: Untagged
@@ -84,3 +85,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &4414791193311388470
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5903680622888019316}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.84, y: 0.6}
+    newSize: {x: 0.84, y: 0.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.42, y: -0.26}
+      - {x: 0.42, y: -0.01}
+      - {x: 0.39999998, y: 0.06}
+      - {x: 0.099999994, y: 0.29999998}
+      - {x: -0.14999999, y: 0.29999998}
+      - {x: -0.29999998, y: 0.21}
+      - {x: -0.42, y: -0.11}
+      - {x: -0.42, y: -0.29}
+      - {x: -0.39, y: -0.29999998}
+      - {x: -0.12, y: -0.29999998}
+      - {x: -0.06, y: -0.22999999}
+      - {x: 0.34, y: -0.29999998}
+      - {x: 0.39999998, y: -0.29999998}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -14,6 +15,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuWindow;
     [SerializeField] GameObject regWindow;
     [SerializeField] GameObject authWindow;
+
+    public void LoadGame()
+    {
+        SceneManager.LoadScene(1);
+    }
 
     public void Auth()
     {

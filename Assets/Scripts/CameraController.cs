@@ -17,15 +17,16 @@ public class CameraController : MonoBehaviour
         if (Input.GetMouseButton(2))
         {
             endPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            gameObject.transform.position += startPos - endPos;
         }
 
-        gameObject.transform.position += startPos - endPos;
+        
 
         Vector3 zoom = Input.mouseScrollDelta;
 
         if (zoom != Vector3.zero)
         {
-            if (mainCamera.orthographicSize - zoom.y >= 1 && mainCamera.orthographicSize - zoom.y < 10)
+            if (mainCamera.orthographicSize - zoom.y >= 3 && mainCamera.orthographicSize - zoom.y < 10)
             {
                 mainCamera.orthographicSize -= zoom.y;
             }
