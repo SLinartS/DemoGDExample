@@ -13,7 +13,7 @@ public class Tile : MonoBehaviour
     public bool road;
     public int count;
 
-    public GameController gameController;
+    public SelectController selectController;
 
     SpriteRenderer spriteRenderer;
     Sprite initSprite;
@@ -47,29 +47,29 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        
+
         if (!Input.GetKey(KeyCode.LeftControl) && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButton(0) && !child)
         {
-            if (gameController.selectedSprite)
+            if (selectController.selectedSprite)
             {
-                spriteRenderer.sprite = gameController.selectedSprite;
+                spriteRenderer.sprite = selectController.selectedSprite;
                 road = false;
             }
-            if (gameController.selectedPrefab)  
+            if (selectController.selectedPrefab != null)
             {
-                //Vector3 newHousePos = housePos.transform.position;
-                //newHousePos += new Vector3(0, 0.4f * houses.Count, 0);
+                if (selectController.selectedPrefab.type == TypePrefab.House || selectController.selectedPrefab.type == TypePrefab.Fabric)
+                {
+                    child = Instantiate(selectController.selectedPrefab.prefab, housePos.transform.position, Quaternion.identity, gameObject.transform);
+                    child.GetComponent<House>().selectController = selectController;
+                }
 
-                child = Instantiate(gameController.selectedPrefab, housePos.transform.position, Quaternion.identity, gameObject.transform);
-                child.GetComponent<House>().gameController = gameController;
                 spriteRenderer.sprite = initSprite;
                 road = false;
             }
-            if (gameController.selectedRoadSprite && !child)
+            if (selectController.selectedRoadSprite && !child)
             {
-                spriteRenderer.sprite = gameController.selectedRoadSprite;
+                spriteRenderer.sprite = selectController.selectedRoadSprite;
                 road = true;
-
             }
             TypeRoad();
             if (tileTop) tileTop.TypeRoad();

@@ -12,12 +12,9 @@ public class GameController : MonoBehaviour
     [SerializeField] int width;
     [SerializeField] int height;
 
-    public Sprite selectedSprite;
-    public Sprite selectedRoadSprite;
-    public GameObject selectedPrefab;
-    public GameObject selectedRoofPrefab;
     public Tile[,] tiles;
 
+    public SelectController selectController;
 
     private void Awake()
     {
@@ -46,44 +43,13 @@ public class GameController : MonoBehaviour
                     pos = new Vector3(offsetX * x + offsetX / 2 - width / 2, offsetY * y - height / 4, y);
                 }
                 GameObject newtile = Instantiate(tilePrefab, pos, Quaternion.identity, tileMap.transform);
-                newtile.GetComponent<Tile>().gameController = this;
+                newtile.GetComponent<Tile>().selectController = selectController;
 
                 tiles[x, y] = newtile.GetComponent<Tile>();
             }
         }
     }
 
-    public void ClearSelected()
-    {
-        selectedPrefab = null;
-        selectedRoofPrefab = null;
-        selectedRoadSprite = null;
-        selectedSprite = null;
-    }
-
-    public void SelectTile(Sprite newSprite)
-    {
-        ClearSelected();
-        selectedSprite = newSprite;
-    }
-
-    public void SelectHouse(GameObject newPrefab)
-    {
-        ClearSelected();
-        selectedPrefab = newPrefab;
-    }
-
-    public void SelectRoof(GameObject newPrefab)
-    {
-        ClearSelected();
-        selectedRoofPrefab = newPrefab;
-    }
-
-    public void SelectRoadSprite(Sprite newRoadSprite)
-    {
-        ClearSelected();
-        selectedRoadSprite = newRoadSprite;
-    }
 
     public void InitialTile()
     {
