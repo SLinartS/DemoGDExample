@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalData : MonoBehaviour
+public enum ResourceType
 {
-    public int energy;
-    public int coins;
-    public int polution;
-    public int population;
-    
-    void Start()
-    {
-        
-    }
+    Energy,
+    Coins,
+    Polution,
+    Population
+}
 
-    void Update()
-    {
-        
-    }
+public static class GlobalData
+{
+    public static int energy;
+    public static int coins;
+    public static int polution;
+    public static int population;
 }

@@ -10,7 +10,10 @@ public enum TypePrefab
     HouseRoof,
     Fabric,
     FabricRoof,
-    FabricTube
+    FabricTube,
+    Tree,
+    GeneratorWind,
+    GeneratorSun
 }
 
 public enum TypeFloor
@@ -74,6 +77,15 @@ public class Selected
                 break;
             case "FabricTube":
                 type = TypePrefab.FabricTube;
+                break;
+            case "Tree":
+                type = TypePrefab.Tree;
+                break;
+            case "GeneratorWind":
+                type = TypePrefab.GeneratorWind;
+                break;
+            case "GeneratorSun":
+                type = TypePrefab.GeneratorSun;
                 break;
             default:
                 throw new Exception("Error selected block type");

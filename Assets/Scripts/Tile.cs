@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
     public int count;
 
     public SelectController selectController;
+    public ResourceController resourceController;
 
     SpriteRenderer spriteRenderer;
     Sprite initSprite;
@@ -61,6 +62,18 @@ public class Tile : MonoBehaviour
                 {
                     child = Instantiate(selectController.selectedPrefab.prefab, housePos.transform.position, Quaternion.identity, gameObject.transform);
                     child.GetComponent<House>().selectController = selectController;
+                    child.GetComponent<House>().resourceController = resourceController;
+                }
+                if (selectController.selectedPrefab.type == TypePrefab.Tree)
+                {
+                    child = Instantiate(selectController.selectedPrefab.prefab, housePos.transform.position, Quaternion.identity, gameObject.transform);
+                    child.GetComponent<Tree>().resourceController = resourceController;
+                }
+                if (selectController.selectedPrefab.type == TypePrefab.GeneratorWind || selectController.selectedPrefab.type == TypePrefab.GeneratorSun)
+                {
+                    child = Instantiate(selectController.selectedPrefab.prefab, housePos.transform.position, Quaternion.identity, gameObject.transform);
+                    child.GetComponent<Generator>().typePrefab = selectController.selectedPrefab.type;
+                    child.GetComponent<Generator>().resourceController = resourceController;
                 }
 
                 spriteRenderer.sprite = initSprite;

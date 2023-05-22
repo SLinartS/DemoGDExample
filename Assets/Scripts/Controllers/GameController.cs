@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public Tile[,] tiles;
 
     public SelectController selectController;
+    public ResourceController resourceController;
 
     private void Awake()
     {
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
                 }
                 GameObject newtile = Instantiate(tilePrefab, pos, Quaternion.identity, tileMap.transform);
                 newtile.GetComponent<Tile>().selectController = selectController;
+                newtile.GetComponent<Tile>().resourceController = resourceController;
 
                 tiles[x, y] = newtile.GetComponent<Tile>();
             }

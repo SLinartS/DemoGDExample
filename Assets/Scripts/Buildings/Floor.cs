@@ -45,6 +45,7 @@ public class Floor : MonoBehaviour
                 if (typeFloor == TypeFloor.HouseFloor)
                 {
                     isCanCreate = false;
+                    parent.HouseCompleted();
                 }
             }
             if (isRoofBuild && typeFloor == TypeFloor.FabricFloor && selectController.selectedPrefab?.type == TypePrefab.FabricTube)
@@ -54,6 +55,7 @@ public class Floor : MonoBehaviour
 
                 GameObject roof = Instantiate(selectController.selectedPrefab.prefab, newHousePos, Quaternion.identity, gameObject.transform);
                 isCanCreate = false;
+                parent.FabricCompleted();
             }
         }
 
