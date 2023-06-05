@@ -1,52 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
-public class UserData : MonoBehaviour
+public static class UserData
 {
+    private static List<User> users = new List<User>();
 
-    static List<User> users = new List<User>();
-    // Start is called before the first frame update
-
-    public static bool UserCreate(string login, string password)
+    public static bool RegistrationUser(string login, string password)
     {
-        if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
+        if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
         {
-            User user = new User(login, password);
-            users.Add(user);
-            return true;
+            return false;
         }
-        return false;
-    }
 
-    public static bool CheckUser(string login, string password)
-    {
-        if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
-        {
-            for (int i = 0; i < users.Count; i++)
-            {
-                if (users[i].login == login && users[i].password == password)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
+        User newUser = new User(login, password);
+        users.Add(newUser);
+        return true;
     }
 
     public static bool CheckLogin(string login)
     {
-        if (!string.IsNullOrEmpty(login))
+        if (string.IsNullOrEmpty(login))
         {
-            for (int i = 0; i < users.Count; i++)
+            return false;
+        }
+
+        for (int i = 0; i < users.Count; i++)
+        {
+            if (login == users[i].login)
             {
-                if (users[i].login == login)
-                {
-                    return false;
-                }
+                return false;
             }
-            return true;
+        }
+
+        return true;
+    }
+
+    public static bool LoginUser(string login, string password)
+    {
+        for (int i = 0; i < users.Count; i++)
+        {
+            if (login == users[i].login && password == users[i].password)
+            {
+                return true;
+            }
         }
         return false;
     }
@@ -54,7 +51,6 @@ public class UserData : MonoBehaviour
 
 public class User
 {
-
     public string login;
     public string password;
 
